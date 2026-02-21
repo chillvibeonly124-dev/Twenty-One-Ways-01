@@ -1,0 +1,50 @@
+`timescale 1ns / 1ps
+
+module tb_to1_Multiplexer;
+
+    reg  [7:0] a_i;
+    reg  [7:0] b_i;
+    reg        sel_i;
+    wire [7:0] y_o;
+
+    // Instantiate DUT
+    to1_Multiplexer dut (
+        .a_i(a_i),
+        .b_i(b_i),
+        .sel_i(sel_i),
+        .y_o(y_o)
+    );
+
+    initial begin
+        // Initialize inputs
+        a_i   = 8'h00;
+        b_i   = 8'h00;
+        sel_i = 1'b0;
+
+        #10;
+        a_i = 8'hAA;   // 10101010
+        b_i = 8'h55;   // 01010101
+
+        // Select a_i
+        sel_i = 0;
+        #10;
+
+        // Select b_i
+        sel_i = 1;
+        #10;
+
+        // Change inputs
+        a_i = 8'hF0;
+        b_i = 8'h0F;
+
+        sel_i = 0;
+        #10;
+
+        sel_i = 1;
+        #10;
+
+        // End simulation
+        $stop;
+    end
+
+endmodule

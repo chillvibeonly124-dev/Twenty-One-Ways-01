@@ -1,0 +1,13 @@
+`timescale 1ns / 1ps
+
+module to1_Multiplexer (
+    input  wire [7:0] a_i,   // First leg of the mux
+    input  wire [7:0] b_i,   // Second leg of the mux
+    input  wire       sel_i, // Mux select
+    output wire [7:0] y_o    // Mux output
+);
+
+    // Combinational 2:1 multiplexer
+    assign y_o = (sel_i) ? b_i : a_i;
+
+endmodule
